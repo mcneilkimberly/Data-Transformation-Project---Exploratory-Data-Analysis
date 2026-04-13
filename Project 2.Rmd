@@ -12,6 +12,12 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
+## Introduction
+
+Our dataset is the 2025 schedule and results for the Connecticut Sun, a WNBA team. The data looks at the dates when the games were played, who they played against, the scores, as well as whether they were on a win/lose streak. Additional factors included were where they played the game, if it went into overtime, and additional notes. The sample size was 44. The data was obtained from basketball reference at this link http://basketball-reference.com/wnba/teams/CON/2025_games.html. 
+
+## Data Import
+
 ```{r}
 basketball <- read_csv("
 G,Date,,Opponent,,,Tm,Opp,W,L,Streak,Notes
@@ -59,5 +65,17 @@ G,Date,,Opponent,,,Tm,Opp,W,L,Streak,Notes
 42,Sat Sep 6 2025,,Phoenix Mercury,W,,87,84,11,31,W 1,
 43,Mon Sep 8 2025,@,Atlanta Dream,L,,62,87,11,32,L 1,
 44,Wed Sep 10 2025,,Atlanta Dream,L,,72,88,11,33,L 2")
+
+basketball <- janitor::clean_names(basketball)
 ```
 
+```{r}
+basketball
+```
+
+
+## Exploratory Data Analysis
+
+### Variable Exploration
+
+#### Date Variable
