@@ -79,3 +79,7 @@ basketball
 ### Variable Exploration
 
 #### Date Variable
+
+#### Team Score
+
+#### Bivariate
