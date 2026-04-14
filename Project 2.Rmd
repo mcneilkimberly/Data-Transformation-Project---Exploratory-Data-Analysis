@@ -64,10 +64,13 @@ G,Date,,Opponent,,,Tm,Opp,W,L,Streak,Notes
 41,Wed Sep 3 2025,@,Chicago Sky,L,,64,88,10,31,L 3,
 42,Sat Sep 6 2025,,Phoenix Mercury,W,,87,84,11,31,W 1,
 43,Mon Sep 8 2025,@,Atlanta Dream,L,,62,87,11,32,L 1,
-44,Wed Sep 10 2025,,Atlanta Dream,L,,72,88,11,33,L 2", col_types = cols(Date = col_date("%m/%d/%y")))
+44,Wed Sep 10 2025,,Atlanta Dream,L,,72,88,11,33,L 2", col_types = cols(Date = col_date("%a %b %d %Y")))
 
 
 basketball <- janitor::clean_names(basketball) 
+
+
+
   
 ```
 
