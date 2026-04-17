@@ -10,6 +10,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
+library(lubridate)
 ```
 
 ## Introduction
@@ -74,6 +75,7 @@ basketball <- janitor::clean_names(basketball)
   
 ```
 
+We imported the data as a csv file, and then used a command to make the date variable be recognized as date data. Following this we cleaned the names of the variables, so they would be easier to use going forward. 
 ```{r}
 basketball
 ```
@@ -85,6 +87,16 @@ basketball
 
 #### Date Variable
 
+```{r}
+basketball %>%
+mutate(wday = wday(date, label = TRUE)) %>%
+ggplot(aes(x = wday)) +
+geom_bar() +
+  labs (x = "Day of the Week")
+```
+
+
 #### Team Score
 
 #### Bivariate
+
