@@ -11,6 +11,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(lubridate)
+library(knitr)
 ```
 
 ## Introduction
@@ -95,8 +96,37 @@ geom_bar() +
   labs (x = "Day of the Week")
 ```
 
+```{r}
+basketball %>%
+mutate(month = month(date, label = TRUE)) %>%
+ggplot(aes(x = month)) +
+geom_bar() 
+```
+
 
 #### Team Score
 
+```{r}
+basketball %>%
+  summarize(
+    Count = n(),
+    Mean = mean(tm, na.rm = TRUE),
+    Median = median(tm, na.rm = TRUE),
+    sd = sd(tm, na.rm = TRUE),
+    Min = min(tm, na.rm = TRUE),
+    Q1 = quantile(tm, 0.25, na.rm = TRUE),
+    Q3 = quantile(tm, 0.75, na.rm = TRUE),
+    Max = max(tm, na.rm = TRUE)
+  ) %>% 
+  kable(caption = "Summary Statistics for Team Points")
+```
+
 #### Bivariate
+
+```{r}
+ggplot(basketball, aes(x = date, y = tm)) +
+  geom_point()+
+  geom_line()+
+  labs (y = "Team Points", x = "Date")
+```
 
