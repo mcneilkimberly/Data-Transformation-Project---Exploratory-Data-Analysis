@@ -121,12 +121,30 @@ basketball %>%
   kable(caption = "Summary Statistics for Team Points")
 ```
 
+```{r}
+basketball %>% 
+  ggplot(aes(x = tm)) +
+    geom_histogram(bins = 15) +
+    labs(title = "Distribution of Team Points (Histogram)",
+         x = "Team Score",
+         y = "Count")
+```
+```{r}
+ggplot(basketball, aes(x=tm))+
+  geom_boxplot() +
+  labs (title = "Team Score Boxplot", 
+    x = "Team Score")
+
+```
+
 #### Bivariate
 
 ```{r}
-ggplot(basketball, aes(x = date, y = tm)) +
-  geom_point()+
-  geom_line()+
-  labs (y = "Team Points", x = "Date")
+ggplot(basketball, aes(x = date, y = tm )) +
+  geom_point(alpha = 0.2)+ 
+  geom_smooth(color = "steelblue") +
+  labs(x = "Date", y = "Team Score")
 ```
+
+
 
