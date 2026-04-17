@@ -77,8 +77,12 @@ basketball <- janitor::clean_names(basketball)
 ```
 
 We imported the data as a csv file, and then used a command to make the date variable be recognized as date data. Following this we cleaned the names of the variables, so they would be easier to use going forward. 
+
+A brief look at the data:
+
 ```{r}
-basketball
+kable(basketball %>%
+        head(n = 5))
 ```
 
 
@@ -92,7 +96,8 @@ basketball
 basketball %>%
 mutate(wday = wday(date, label = TRUE)) %>%
 ggplot(aes(x = wday)) +
-geom_bar() +
+geom_bar(color = "black",
+         fill = "darkorange") +
   labs (x = "Day of the Week")
 ```
 
@@ -100,7 +105,8 @@ geom_bar() +
 basketball %>%
 mutate(month = month(date, label = TRUE)) %>%
 ggplot(aes(x = month)) +
-geom_bar() 
+geom_bar(color = "black",
+         fill = "darkorange") 
 ```
 
 
@@ -124,7 +130,9 @@ basketball %>%
 ```{r}
 basketball %>% 
   ggplot(aes(x = tm)) +
-    geom_histogram(bins = 15) +
+    geom_histogram(bins = 15,
+                   fill = "darkorange",
+                   color = "black") +
     labs(title = "Distribution of Team Points (Histogram)",
          x = "Team Score",
          y = "Count")
@@ -142,7 +150,7 @@ ggplot(basketball, aes(x=tm))+
 ```{r}
 ggplot(basketball, aes(x = date, y = tm )) +
   geom_point(alpha = 0.2)+ 
-  geom_smooth(color = "steelblue") +
+  geom_smooth(color = "darkorange") +
   labs(x = "Date", y = "Team Score")
 ```
 
