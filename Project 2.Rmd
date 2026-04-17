@@ -116,10 +116,7 @@ ggplot(basketball, aes(x=team_points))+
 
 ```
 
-### Time-Based Patterns
-
-#### Overall
-
+#### Bivariate Relationship
 ```{r}
 ggplot(basketball, aes(x = date, y = team_points)) +
   geom_point(alpha = 0.2)+ 
@@ -128,6 +125,8 @@ ggplot(basketball, aes(x = date, y = team_points)) +
        x = "Date", 
        y = "Team Score")
 ```
+
+### Time-Based Patterns
 
 #### Day/Month 
 
