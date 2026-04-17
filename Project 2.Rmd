@@ -65,19 +65,19 @@ kable(basketball %>%
 
 ```{r}
 basketball %>%
-mutate(wday = wday(date, label = TRUE)) %>%
-ggplot(aes(x = wday)) +
-geom_bar(color = "black",
-         fill = "darkorange") +
+  mutate(wday = wday(date, label = TRUE)) %>%
+  ggplot(aes(x = wday)) +
+  geom_bar(color = "black",
+           fill = "darkorange") +
   labs (x = "Day of the Week")
 ```
 
 ```{r}
 basketball %>%
-mutate(month = month(date, label = TRUE)) %>%
-ggplot(aes(x = month)) +
-geom_bar(color = "black",
-         fill = "darkorange") 
+  mutate(month = month(date, label = TRUE)) %>%
+  ggplot(aes(x = month)) +
+  geom_bar(color = "black",
+           fill = "darkorange") 
 ```
 
 
@@ -110,20 +110,120 @@ basketball %>%
 ```
 ```{r}
 ggplot(basketball, aes(x=team_points))+
-  geom_boxplot() +
+  geom_boxplot(fill = "darkorange", color = "black") +
   labs (title = "Team Score Boxplot", 
     x = "Team Score")
 
 ```
 
-#### Bivariate
+### Time-Based Patterns
+
+#### Overall
 
 ```{r}
 ggplot(basketball, aes(x = date, y = team_points)) +
   geom_point(alpha = 0.2)+ 
   geom_smooth(color = "darkorange") +
-  labs(x = "Date", y = "Team Score")
+  labs(title = "Team Scores Over Time", 
+       x = "Date", 
+       y = "Team Score")
+```
+
+#### Day/Month 
+
+```{r}
+basketball %>%
+  mutate(day = wday(date, label = TRUE)) %>%
+  group_by(day) %>%
+  summarize(avg_score = mean(team_points)) %>%
+  kable(caption = "Average Team Score by Day of the Week")
 ```
 
 
+```{r}
+basketball %>%
+  mutate(day = wday(date, label = TRUE)) %>%
+  group_by(day) %>%
+  summarize(avg_score = mean(team_points)) %>%
+  ggplot(aes(x = day, y = avg_score)) +
+  geom_col(fill = "darkorange", color = "black") +
+  labs(title = "Average Team Score by Day of the Week",
+       x = "Day of the Week",
+       y = "Average Team Score")
+```
+
+```{r}
+basketball %>%
+  mutate(month = month(date, label = TRUE)) %>%
+  group_by(month) %>%
+  summarize(avg_score = mean(team_points)) %>%
+  kable(caption = "Average Team Score by Month")
+```
+
+
+```{r}
+basketball %>%
+  mutate(month = month(date, label = TRUE)) %>%
+  group_by(month) %>%
+  summarize(avg_score = mean(team_points)) %>%
+  ggplot(aes(x = month, y = avg_score)) +
+  geom_col(fill = "darkorange", color = "black") +
+  labs(title = "Average Team Score by Month",
+       x = "Month",
+       y = "Average Team Score")
+```
+
+
+#### Weekend vs Weekday
+
+```{r}
+basketball %>%
+  mutate(day_type = ifelse(wday(date) %in% c(1,7), "Weekend", "Weekday")) %>% # 1 = Sun and 7 = Sat
+  group_by(day_type) %>%
+  summarize(avg_score = mean(team_points)) %>%
+  kable(caption = "Average Team Scores on Weekdays vs Weekends")
+```
+
+```{r}
+ggplot(basketball %>%
+         mutate(day_type = ifelse(wday(date) %in% c(1,7), "Weekend", "Weekday")),
+       aes(x = day_type, y = team_points)) +
+  geom_boxplot(fill = "darkorange") +
+  labs(title = "Average Team Scores on Weekdays vs Weekends",
+       x = "Weekday or Weekend", 
+       y = "Average Team Score")
+```
+
+
+#### Season/Quarter
+
+
+
+
+note: quarter standards are 1 = (Jan, Feb, Mar), 2 = (Apr, May, June), 3 = (July, Aug, Sept), 4 = (Oct, Nov, Dec), but we can customize if yall want
+
+
+
+
+
+
+```{r}
+basketball %>%
+  mutate(quarter = quarter(date)) %>%
+  group_by(quarter) %>%
+  summarize(avg_score = mean(team_points)) %>%
+  kable(caption = "Average Team Scores by Quarter")
+```
+
+```{r}
+basketball %>%
+  mutate(quarter = quarter(date)) %>%
+  group_by(quarter) %>%
+  summarize(avg_score = mean(team_points)) %>%
+  ggplot(aes(x = factor(quarter), y = avg_score)) +
+  geom_col(fill = "darkorange", color = "black") +
+  labs(title = "Average Team Score by Season Quarter",
+       x = "Quarter",
+       y = "Average Team Score")
+```
 
