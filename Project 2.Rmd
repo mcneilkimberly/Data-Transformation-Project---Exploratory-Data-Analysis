@@ -84,7 +84,7 @@ basketball %>%
   labs(title = "Month Data")
 ```
 
-Here we can see the breakdown of months in which games were played. Games were played from May to September, with September having the most games played in it. This makes sense as the WNBA season starts in May and ends in September.
+Here we can see the breakdown of months in which games were played. Games were played from May to September, with August having the most games played in it. This makes sense as the WNBA season starts in May and ends in September.
 
 
 ```{r}
@@ -96,7 +96,7 @@ ggplot(basketball %>%
        x = "Weekday or Weekend")
 ```
 
-Here we can see that they played more games on weekdays than on weekends. This could be useful for later analysis as there is more data for games played on weekdays.
+Here we can see that they played more games on weekdays than on weekends. This could be useful for later analysis as there is more data for games played on weekdays. 
 
 
 #### Team Score
