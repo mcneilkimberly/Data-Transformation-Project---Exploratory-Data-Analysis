@@ -181,6 +181,9 @@ basketball %>%
        y = "Average Team Score")
 ```
 
+As shown above, the average team score is lowest on Monday and highest on Saturday. Sundays, the weekday with the most games by plurality, have the second lowest average team score.
+
+
 ```{r}
 basketball %>%
   mutate(month = month(date, label = TRUE)) %>%
@@ -202,6 +205,8 @@ basketball %>%
        y = "Average Team Score")
 ```
 
+June's average team score was the lowest at 69.5, but immediately after, July had the highest average team score of 82.1. The Suns' average team score gradually decreased going into August and later September.
+
 
 #### Weekend vs Weekday
 
@@ -222,6 +227,8 @@ ggplot(basketball %>%
        x = "Weekday or Weekend", 
        y = "Average Team Score")
 ```
+
+The Suns tended to perform better on weekdays, with a higher minimum and maximum average team score, and a higher median average team score than on weekends. Since we know that fewer games were played on weekends, it could be possible that the apparent higher inter-quartile range is because that smaller number of games means the quartiles have stretched slightly.  
 
 
 #### Season/Quarter
