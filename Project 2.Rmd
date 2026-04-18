@@ -8,7 +8,9 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE) #add error = FALSE and message = FALSE when complete!!!
+knitr::opts_chunk$set(echo = TRUE, 
+                      error = FALSE, 
+                      message = FALSE)
 library(tidyverse)
 library(lubridate)
 library(knitr)
@@ -84,14 +86,15 @@ basketball %>%
   labs(title = "Month Data")
 ```
 
-Here we can see the breakdown of months in which games were played. Games were played from May to September, with August having the most games played in it. This makes sense as the WNBA season starts in May and ends in September.
+Now we can see the breakdown of months in which games were played. Games were played from May to September, with August having the most games played in it. This makes sense as the WNBA season starts in May and ends in September.
 
 
 ```{r}
 ggplot(basketball %>%
          mutate(day_type = ifelse(wday(date) %in% c(1,7), "Weekend", "Weekday")),
        aes(x = day_type)) +
-  geom_bar(fill = "darkorange") +
+  geom_bar(color = "black",
+           fill = "darkorange") +
   labs(title = "Number of Games on Weekends vs Weekdays",
        x = "Weekday or Weekend")
 ```
@@ -127,8 +130,6 @@ basketball %>%
          y = "Count")
 ```
 
-
-
 ```{r}
 ggplot(basketball, aes(x=team_points))+
   geom_boxplot(fill = "darkorange", color = "black") +
@@ -159,7 +160,6 @@ Here we can see the relationship between the date and team score. There appears 
 
 The following summary and bar plot showcase the Average Team Score by the Day of the Week: 
 
-
 ```{r}
 basketball %>%
   mutate(day = wday(date, label = TRUE)) %>%
@@ -167,7 +167,6 @@ basketball %>%
   summarize(avg_score = mean(team_points)) %>%
   kable(caption = "Average Team Score by Day of the Week")
 ```
-
 
 ```{r}
 basketball %>%
@@ -181,8 +180,9 @@ basketball %>%
        y = "Average Team Score")
 ```
 
-As shown above, the average team score is lowest on Monday and highest on Saturday. Sundays, the weekday with the most games by plurality, have the second lowest average team score.
+Looking at the average team score by the day of the week, we can see that there is not much variance in the average amount of points scored each day of the week. It does seem to slightly increase as the week continues, with Monday being the lowest at 71.8 points and Saturday being the highest at 83.7 points. Sundays, the weekday with the most games by plurality, have the second lowest average team score.
 
+This new summary and bar plot showcase the Average Team Score by Month:
 
 ```{r}
 basketball %>%
@@ -191,7 +191,6 @@ basketball %>%
   summarize(avg_score = mean(team_points)) %>%
   kable(caption = "Average Team Score by Month")
 ```
-
 
 ```{r}
 basketball %>%
@@ -205,8 +204,7 @@ basketball %>%
        y = "Average Team Score")
 ```
 
-June's average team score was the lowest at 69.5, but immediately after, July had the highest average team score of 82.1. The Suns' average team score gradually decreased going into August and later September.
-
+Now looking at the average team score by month, we can see that there is also not too much variance between the months, with a slight pattern of having one good month—May and July—before getting increasingly worse—first into June, then August/September—though not by much. June is our lowest performing month at 69.45 points while July is our highest at 82.125 points. 
 
 #### Weekend vs Weekday
 
@@ -233,7 +231,6 @@ The Suns tended to perform better on weekdays, with a higher minimum and maximum
 
 #### Season/Quarter
 
-
 ```{r}
 basketball %>%
   mutate(quarter = quarter(date)) %>%
@@ -254,9 +251,14 @@ basketball %>%
        y = "Average Team Score")
 ```
 
-
-The Connecticut Suns played games in quarters 2 and 3 with quarter comprising April through June and quarter 3 being from July to September. The team score was slightly higher in quarter 3 with an average of 78 points compared to 71 points in quarter 2. 
-
+The Connecticut Suns played games in quarters 2 and 3 with quarter 2 comprising April through June and quarter 3 being from July to September. The average team score was slightly higher in quarter 3 with an average of 78 points compared to 71 points in quarter 2. 
 
 ## Conclusion
 
+Throughout the Connecticut Sun’s season, May through September, we can see slight variations in the team scores depending on the date. The team performed similarly on weekends and weekdays, with an average score of approximately 75. The average team score based on day of the week stayed relatively consistent.
+
+The average team score varied slightly per month, with July having the highest average team score and June having the lowest. 
+
+The average team score varied based on quarter of the year. The average team score in quarter three was 78.85 which was higher than the score in quarter 2 of 71. 
+
+There are a multitude of other factors that could contribute to team score changing, such as player injuries or the opponent team. For future analysis, it would be interesting to look into data for preseason events in April, and compare performance from preseason to the actual season. Additionally, looking into the opponents score and where the game was played would also be interesting. 
