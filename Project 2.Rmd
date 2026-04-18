@@ -86,6 +86,19 @@ basketball %>%
 
 Here we can see the breakdown of months in which games were played. Games were played from May to September, with September having the most games played in it. This makes sense as the WNBA season starts in May and ends in September.
 
+
+```{r}
+ggplot(basketball %>%
+         mutate(day_type = ifelse(wday(date) %in% c(1,7), "Weekend", "Weekday")),
+       aes(x = day_type)) +
+  geom_bar(fill = "darkorange") +
+  labs(title = "Number of Games on Weekends vs Weekdays",
+       x = "Weekday or Weekend")
+```
+
+Here we can see that they played more games on weekdays than on weekends. This could be useful for later analysis as there is more data for games played on weekdays.
+
+
 #### Team Score
 
 ```{r}
@@ -214,15 +227,6 @@ ggplot(basketball %>%
 #### Season/Quarter
 
 
-
-
-note: quarter standards are 1 = (Jan, Feb, Mar), 2 = (Apr, May, June), 3 = (July, Aug, Sept), 4 = (Oct, Nov, Dec), but we can customize if yall want
-
-
-
-
-
-
 ```{r}
 basketball %>%
   mutate(quarter = quarter(date)) %>%
@@ -242,4 +246,10 @@ basketball %>%
        x = "Quarter",
        y = "Average Team Score")
 ```
+
+
+The Connecticut Suns played games in quarters 2 and 3 with quarter comprising April through June and quarter 3 being from July to September. The team score was slightly higher in quarter 3 with an average of 78 points compared to 71 points in quarter 2. 
+
+
+## Conclusion
 
