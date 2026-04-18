@@ -69,17 +69,22 @@ basketball %>%
   ggplot(aes(x = wday)) +
   geom_bar(color = "black",
            fill = "darkorange") +
-  labs (x = "Day of the Week")
+  labs (x = "Day of the Week",
+        title = "Day of the Week Breakdown")
 ```
+
+Here we can see the breakdown of days of the week in which games were played. Games were played on all days of the week with Sunday being by far the most popular day, and Thursday being the least popular. 
 
 ```{r}
 basketball %>%
   mutate(month = month(date, label = TRUE)) %>%
   ggplot(aes(x = month)) +
   geom_bar(color = "black",
-           fill = "darkorange") 
+           fill = "darkorange") +
+  labs(title = "Month Data")
 ```
 
+Here we can see the breakdown of months in which games were played. Games were played from May to September, with September having the most games played in it. This makes sense as the WNBA season starts in May and ends in September.
 
 #### Team Score
 
@@ -108,6 +113,9 @@ basketball %>%
          x = "Team Score",
          y = "Count")
 ```
+
+
+
 ```{r}
 ggplot(basketball, aes(x=team_points))+
   geom_boxplot(fill = "darkorange", color = "black") +
@@ -115,6 +123,9 @@ ggplot(basketball, aes(x=team_points))+
     x = "Team Score")
 
 ```
+
+Above we can see visualizations of the team score per game. Across all 44 of the games, the lowest score was 52 and the highest score was 101. The average score was approximately 75 pts. 
+
 
 #### Bivariate Relationship
 ```{r}
@@ -126,9 +137,15 @@ ggplot(basketball, aes(x = date, y = team_points)) +
        y = "Team Score")
 ```
 
+Here we can see the relationship between the date and team score. There appears to be some fluctuation due to month, with scores increasing in August, and then decreasing into September. 
+
+
 ### Time-Based Patterns
 
 #### Day/Month 
+
+The following summary and bar plot showcase the Average Team Score by the Day of the Week: 
+
 
 ```{r}
 basketball %>%
